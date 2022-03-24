@@ -21,7 +21,7 @@ CREATE TABLE Contatos(
 CREATE TABLE Destinos(
 	id_destino int PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	cidade_destino nvarchar(max) NOT NULL,
-	estado_destino nvarchar(max) NOT NULL,)
+	estado_destino nvarchar(max) NOT NULL,);
 
 
 CREATE TABLE Promocoes(
