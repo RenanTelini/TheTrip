@@ -16,7 +16,7 @@ export default function Index() {
   useEffect(() => {
     getAllClientes();
   }, []);
-
+console.log(clientes)
   const deleteClientes = (clientesId) => {
     ClientesService.deleteClientes(clientesId).then((response) => {
       getAllClientes();
@@ -56,13 +56,13 @@ export default function Index() {
                   <td>{clientes.cidade_Cliente}</td>
                   <td>{clientes.estado_Cliente}</td>
                   <td>
-                    {clientes.destino.cidade_Destino} {clientes.destino.estado_Destino}
+                    {clientes.destinos.cidade_Destino} {clientes.destinos.estado_Destino}
                   </td>
                   <td>
-                    {clientes.contato.email_Contato} {clientes.contato.telefone_Contato}
+                    {clientes.contatos.email_Contato} {clientes.contatos.telefone_Contato}
                   </td>
                   <td>
-                    {clientes.promocao.valor_Promocao}
+                    {clientes.promocoes.valor_Promocao}
                   </td>
 
                   <td className="d-flex">

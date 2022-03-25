@@ -10,20 +10,20 @@ export default function Create() {
   const [cidade_Cliente, setCidade_Cliente] = useState("");
   const [estado_Cliente, setEstado_Cliente] = useState("");
 
-  const [destino, setDestino] = useState({ id_Destino: "", cidade_Destino: "", estado_Destino: "" });
-  const [contato, setContato] = useState({ id_Contato: "", email_Contato: "", telefone_Contato: "" });
-  const [promocao, setPromocao] = useState({ id_Promocao: "", valor_Promocao: "" });
+  const [destinos, setDestinos] = useState({ id_Destino: "", cidade_Destino: "", estado_Destino: "" });
+  const [contatos, setContatos] = useState({ id_Contato: "", email_Contato: "", telefone_Contato: "" });
+  const [promocoes, setPromocoes] = useState({ id_Promocao: "", valor_Promocao: "" });
 
-  const [contatos, setContatos] = useState([]);
-  const [destinos, setDestinos] = useState([]);
-  const [promocoes, setPromocoes] = useState([]);
+  const [contatosArray, setContatosArray] = useState([]);
+  const [destinosArray, setDestinosArray] = useState([]);
+  const [promocoesArray, setPromocoesArray] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   const getAllContatos = () => {
     ContatosService.getAllContatos().then((response) => {
-      setContatos(response.data);
+      setContatosArray(response.data);
     }).catch((error) => {
       console.log(error);
     });
@@ -35,7 +35,7 @@ export default function Create() {
 
   const getAllDestinos = () => {
     DestinosService.getAllDestinos().then((response) => {
-      setDestinos(response.data);
+      setDestinosArray(response.data);
     }).catch((error) => {
       console.log(error);
     });
@@ -47,7 +47,7 @@ export default function Create() {
 
   const getAllPromocoes = () => {
     PromocoesService.getAllPromocoes().then((response) => {
-      setPromocoes(response.data);
+      setPromocoesArray(response.data);
     }).catch((error) => {
       console.log(error);
     });
@@ -59,17 +59,21 @@ export default function Create() {
 
 
   const criarOuEditarCliente = (e) => {
-    const cliente = { cidade_Cliente, estado_Cliente, nome_Cliente, contato, destino, promocao };
+    e.preventDefault();
 
-    console.log(cliente)
+    const cliente = { cidade_Cliente, estado_Cliente, nome_Cliente, contatos, destinos, promocoes };
+
+    
 
     if (id) {
       ClientesService.updateClientes(id, cliente).then((response) => {
         navigate("/Clientes");
       });
     } else {
+      console.log(cliente)
       ClientesService.createClientes(cliente).then((response) => {
         navigate("/Clientes");
+        
       });
     }
   };
@@ -81,19 +85,19 @@ export default function Create() {
           setNome_Cliente(response.data.nome_Cliente);
           setCidade_Cliente(response.data.cidade_Cliente);
           setEstado_Cliente(response.data.estado_Cliente);
-          setDestino({
-            id_Destino: response.data.destino.id_Destino,
-            cidade_destino: response.data.destino.cidade_Destino,
-            estado_Destino: response.data.destino.estado_Destino,
+          setDestinos({
+            id_Destino: response.data.destinos.id_Destino,
+            cidade_Destino: response.data.destinos.cidade_Destino,
+            estado_Destino: response.data.destinos.estado_Destino,
           });
-          setContato({
+          setContatos({
             id_Contato: response.data.contatos.id_Contato,
-            email_Contato: response.data.contato.email_Contato,
-            telefone_Contato: response.data.contato.telefone_Contato,
+            email_Contato: response.data.contatos.email_Contato,
+            telefone_Contato: response.data.contatos.telefone_Contato,
           });
-          setPromocao({
-            id_Promocao: response.data.promocao.id_Promocao,
-            valor_Promocao: response.data.promocao.valor_Promocao,
+          setPromocoes({
+            id_Promocao: response.data.promocoes.id_Promocao,
+            valor_Promocao: response.data.promocoes.valor_Promocao,
           });
         }).catch((error) => {
           console.log(error);
@@ -162,12 +166,12 @@ export default function Create() {
               name="fkdestino"
               className="form-select"
               onChange={(e) =>
-                setDestino({ id_Destino: Number.parseInt(e.target.value) })
+                setDestinos({ id_Destino: Number.parseInt(e.target.value) })
               }
             >
-              <option value="DEFAULT">{id ? destino.cidade_Destino : 'Escolha um destino'}</option>
-              {destinos.map((destino) => (
-                <option key={destino.id_Destino} values={destino.id_Destino}>
+              <option value={"DEFAULT"}>{id ? destinos.cidade_Destino : 'Escolha um destino'}</option>
+              {destinosArray.map((destino) => (
+                <option key={destino.id_Destino} value={destino.id_Destino}>
                   {destino.cidade_Destino} - {destino.estado_Destino}
                 </option>
               ))}
@@ -183,11 +187,11 @@ export default function Create() {
               id="fkcontato"
               name="fkcontato"
               className="form-select"
-              onChange={(e) => setContato({ id: Number.parseInt(e.target.value) })
+              onChange={(e) => setContatos({ id_Contato: Number.parseInt(e.target.value) })
               }
             >
-              <option value={"DEFAULT"}>{id ? contato.email_Contato : 'Escolha um contato'}</option>
-              {contatos.map((contato) => (
+              <option value={"DEFAULT"}>{id ? contatos.email_Contato : 'Escolha um contato'}</option>
+              {contatosArray.map((contato) => (
                 <option key={contato.id_Contato} value={contato.id_Contato}>
                   {contato.email_Contato} - {contato.telefone_Contato}
                 </option>
@@ -206,11 +210,11 @@ export default function Create() {
               name="fkpromocao"
               className="form-select"
               onChange={(e) =>
-                setPromocao({ id: Number.parseInt(e.target.value) })
+                setPromocoes({ id_Promocao: Number.parseInt(e.target.value) })
               }
             >
-              <option value="DEFAULT">{id ? promocao.valor_Promocao : 'Escolha uma promoção'}</option>
-              {promocoes.map((promocao) => (
+              <option value="DEFAULT">{id ? promocoes.valor_Promocao : 'Escolha uma promoção'}</option>
+              {promocoesArray.map((promocao) => (
                 <option key={promocao.id_Promocao} value={promocao.id_Promocao}>
                   {promocao.valor_Promocao}
                 </option>
