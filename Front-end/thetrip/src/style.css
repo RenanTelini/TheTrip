@@ -1,9 +1,26 @@
+.divpai{
+  height: 380px;
+  width: 300px;
+}
+
+#Efeito {
+  position: relative;
+  padding-top: 100%;
+}
+
+#Efeito2 {
+  position: absolute;
+  height: 100%;
+  top: 50px;
+  left: 500px;
+}
+
 footer {
-    padding: 20px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  footer img {
-    height: 30px;
-  }
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+footer img {
+  height: 80px;
+}

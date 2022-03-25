@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../views/img/logo.png";
 
 export default function Menu() {
   return (
-    <nav className="navbar navbar-expand-md navbar-light bg-light">
+    <nav className="navbar navbar-expand-md navbar-light ">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          TheTrip
+          <img src={Logo} alt="Logo" style={{height: "60px", marginRight: "30px"}}/>
         </Link>
         <button
           className="navbar-toggler"

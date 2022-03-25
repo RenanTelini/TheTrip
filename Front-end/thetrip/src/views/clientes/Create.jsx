@@ -59,16 +59,16 @@ export default function Create() {
 
 
   const criarOuEditarCliente = (e) => {
-    const clientes = { cidade_Cliente, estado_Cliente, nome_Cliente, contato, destino, promocao };
+    const cliente = { cidade_Cliente, estado_Cliente, nome_Cliente, contato, destino, promocao };
 
-    console.log(clientes)
+    console.log(cliente)
 
     if (id) {
-      ClientesService.updateClientes(id, clientes).then((response) => {
+      ClientesService.updateClientes(id, cliente).then((response) => {
         navigate("/Clientes");
       });
     } else {
-      ClientesService.createClientes(clientes).then((response) => {
+      ClientesService.createClientes(cliente).then((response) => {
         navigate("/Clientes");
       });
     }
@@ -82,18 +82,18 @@ export default function Create() {
           setCidade_Cliente(response.data.cidade_Cliente);
           setEstado_Cliente(response.data.estado_Cliente);
           setDestino({
-            id_Destino: response.data.destinos.id_Destino,
-            cidade_Destino: response.data.destinos.cidade_Destino,
-            estado_Destino: response.data.destinos.estado_Destino,
+            id_Destino: response.data.destino.id_Destino,
+            cidade_destino: response.data.destino.cidade_Destino,
+            estado_Destino: response.data.destino.estado_Destino,
           });
           setContato({
             id_Contato: response.data.contatos.id_Contato,
-            email_Contato: response.data.contatos.email_Contato,
-            telefone_Contato: response.data.contatos.telefone_Contato,
+            email_Contato: response.data.contato.email_Contato,
+            telefone_Contato: response.data.contato.telefone_Contato,
           });
           setPromocao({
-            id_Promocao: response.data.promocoes.id_Promocao,
-            valor_Promocao: response.data.valor_Promocao,
+            id_Promocao: response.data.promocao.id_Promocao,
+            valor_Promocao: response.data.promocao.valor_Promocao,
           });
         }).catch((error) => {
           console.log(error);
@@ -154,12 +154,12 @@ export default function Create() {
 
           {/*--------- Destinos ---------*/}
           <div className="form-group mb-3">
-            <label htmlFor="DestinoId_destino" className="form-label">
+            <label htmlFor="fkdestino" className="form-label">
               Indo para
             </label>
             <select
-              id="DestinoId_destino"
-              name="DestinoId_destino"
+              id="fkdestino"
+              name="fkdestino"
               className="form-select"
               onChange={(e) =>
                 setDestino({ id_Destino: Number.parseInt(e.target.value) })
@@ -176,12 +176,12 @@ export default function Create() {
 
           {/*--------- Contatos ---------*/}
           <div className="form-group mb-3">
-            <label htmlFor="ContatoId_contato" className="form-label">
+            <label htmlFor="fkcontato" className="form-label">
               Contatos
             </label>
             <select
-              id="ContatoId_contato"
-              name="ContatoId_contato"
+              id="fkcontato"
+              name="fkcontato"
               className="form-select"
               onChange={(e) => setContato({ id: Number.parseInt(e.target.value) })
               }
@@ -198,12 +198,12 @@ export default function Create() {
 
           {/*--------- Promoções ---------*/}
           <div className="form-grou mb-3">
-            <label htmlFor="PromocaoId_promocao" className="form-labe">
+            <label htmlFor="fkpromocao" className="form-labe">
               Promoções
             </label>
             <select
-              id="PromocaoId_promocao"
-              name="PromocaoId_promocao"
+              id="fkpromocao"
+              name="fkpromocao"
               className="form-select"
               onChange={(e) =>
                 setPromocao({ id: Number.parseInt(e.target.value) })

@@ -25,7 +25,7 @@ export default function Index() {
         console.log(error);
       });
   };
-
+  
   return (
     <>
       <header className="header">
@@ -49,31 +49,31 @@ export default function Index() {
               </tr>
             </thead>
             <tbody>
-              {clientes.map((cliente) => (
-                <tr key={cliente.id_Cliente}>
-                  <td>{cliente.id_Cliente}</td>
-                  <td>{cliente.nome_Cliente}</td>
-                  <td>{cliente.cidade_Cliente}</td>
-                  <td>{cliente.estado_Cliente}</td>
+              {clientes.map((clientes) => (
+                <tr key={clientes.id_Cliente}>
+                  <td>{clientes.id_Cliente}</td>
+                  <td>{clientes.nome_Cliente}</td>
+                  <td>{clientes.cidade_Cliente}</td>
+                  <td>{clientes.estado_Cliente}</td>
                   <td>
-                    {cliente.destinos.cidade_Destino} {cliente.destinos.estado_Destino}
+                    {clientes.destino.cidade_Destino} {clientes.destino.estado_Destino}
                   </td>
                   <td>
-                    {cliente.contatos.email_Contato} {cliente.contatos.telefone_Contato}
+                    {clientes.contato.email_Contato} {clientes.contato.telefone_Contato}
                   </td>
                   <td>
-                    {cliente.promocoes.valor_Promocao}
+                    {clientes.promocao.valor_Promocao}
                   </td>
 
                   <td className="d-flex">
                     <Link
-                      to={`/Clientes-Update/${cliente.id_Cliente}`}
+                      to={`/Clientes-Update/${clientes.id_Cliente}`}
                       className="btn btn-info">
                       Editar
                     </Link>
                     <button
                       className="btn btn-danger"
-                      onClick={() => deleteClientes(cliente.id_Cliente)}
+                      onClick={() => deleteClientes(clientes.id_Cliente)}
                       style={{ marginLeft: "10px" }} >
                       Deletar
                     </button>

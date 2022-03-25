@@ -10,15 +10,15 @@ export default function Create() {
   const criarOuEditarPromocoes = (e) => {
     e.preventDefault();
 
-    const promocoes = { valor_Promocao };
+    const promocao = { valor_Promocao };
 
-    console.log(promocoes)
+    console.log(promocao)
 
     if (id) {
-      PromocoesService.updatePromocoes(id, promocoes).then((response) => { navigate("/Promocoes") });
+      PromocoesService.updatePromocoes(id, promocao).then((response) => { navigate("/Promocoes") });
 
     } else {
-      PromocoesService.createPromocoes(promocoes).then((response) => { navigate("/Promocoes") })
+      PromocoesService.createPromocoes(promocao).then((response) => { navigate("/Promocoes") })
     }
   }
 

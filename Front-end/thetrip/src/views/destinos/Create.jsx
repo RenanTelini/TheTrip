@@ -11,12 +11,12 @@ export default function Create(){
     const criarOuEditarDestinos = (e) => {
         e.preventDefault();
 
-        const destinos = { cidade_Destino, estado_Destino };
+        const destino = { cidade_Destino, estado_Destino };
 
         if (id) {
-            DestinosService.updateDestinos(id, destinos).then((response) => { navigate("/Destinos") })
+            DestinosService.updateDestinos(id, destino).then((response) => { navigate("/Destinos") })
         } else {
-            DestinosService.createDestinos(destinos).then((response) => { navigate("/Destinos") })
+            DestinosService.createDestinos(destino).then((response) => { navigate("/Destinos") })
         }
     }
 

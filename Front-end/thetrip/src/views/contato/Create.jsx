@@ -11,12 +11,12 @@ export default function Create() {
     const criarOuEditarContatos = (e) => {
         e.preventDefault();
 
-        const contatos = { email_Contato, telefone_Contato };
+        const contato = { email_Contato, telefone_Contato };
 
         if (id) {
-            ContatosService.updateContatos(id, contatos).then((response) => { navigate("/Contatos") })
+            ContatosService.updateContatos(id, contato).then((response) => { navigate("/Contatos") })
         } else {
-            ContatosService.createContatos(contatos).then((response) => { navigate("/Contatos") })
+            ContatosService.createContatos(contato).then((response) => { navigate("/Contatos") })
         }
     }
 
